@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, Button, AsyncStorage } from 'react-native'
+import { View, TextInput, StyleSheet, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { saveDeckTitle } from '../actions'
 import { NavigationActions } from 'react-navigation'
 import { addDeck, fetchDecks } from '../utils/api'
 import { purple, white } from '../utils/colors'
+import SubmitBtn from './SubmitBtn'
 
 
 
@@ -34,21 +35,43 @@ class AddDeck extends Component {
 
   render() {
     return (
-      <View>
-        <TextInput
-          placeholder="New Deck Title"
-          value={this.state.deckTitle}
-          onChangeText={this.inputChange}
-        />
-        <Button
-          title='Add Deck'
-          color={purple}
-          onPress={this.addNewDeck}
-        />
+      <View style={styles.container}>
+        <Text style={styles.header}> Add A New Deck </Text>
+        <View>
+          <TextInput
+            placeholder="New Deck Title"
+            style={styles.userInput}
+            value={this.state.deckTitle}
+            onChangeText={this.inputChange}
+          />
+          <SubmitBtn onPress={this.addNewDeck}>
+            Add Deck
+          </SubmitBtn>
+        </View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: white
+  },
+  userInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    margin: 10
+  },
+  header: {
+    fontSize: 18,
+    padding: 30,
+    textAlign: 'center',
+    fontWeight: 'bold'
+  }
+})
 
 const mapStateToProps = (decks) => {
   return {

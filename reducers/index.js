@@ -24,8 +24,8 @@ const decks = (state = {}, action) => {
       return {
         ...state,
         [action.title]: {
-          title: action.title,
-          questions: [...state.questions, action.title]
+          ...state[action.title],
+          questions: state[action.title].questions.concat(action.question)
         }
       }
     default :

@@ -22,6 +22,13 @@ const Navigation = Platform.OS === 'ios' ?
         tabBarLabel: 'Add Deck',
         tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
       },
+    },
+    AddCard: {
+      screen: AddCard,
+      navigationOptions: {
+        tabBarLabel: 'Add Card',
+        tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+      },
     }
   }, {
     navigationOptions: {
@@ -51,12 +58,19 @@ const Navigation = Platform.OS === 'ios' ?
        tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons name='cards-outline' size={30} color={tintColor} />
      },
    },
-   AddCard: {
-     screen: AddCard,
+   AddDeck: {
+     screen: AddDeck,
      navigationOptions: {
-       tabBarLabel: 'Add Entry',
+       tabBarLabel: 'Add Deck',
        tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
      },
+     AddCard: {
+       screen: AddCard,
+       navigationOptions: {
+         tabBarLabel: 'Add Card',
+         tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+       },
+     }
    },
   }, {
    navigationOptions: {
