@@ -17,10 +17,10 @@ export const getDeck = (deck) => {
   }
 }
 
-export const saveDeckTitle = (title) => {
+export const saveDeckTitle = (newDeck) => {
   return {
     type: SAVE_DECK_TITLE,
-    title
+    newDeck
   }
 }
 

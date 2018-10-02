@@ -48,7 +48,7 @@ const Navigation = Platform.OS === 'ios' ?
      screen: Dashboard,
      navigationOptions: {
        tabBarLabel: 'Dashboard',
-       tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons name='' size={30} color={tintColor} />
+       tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons name='cards-outline' size={30} color={tintColor} />
      },
    },
    AddCard: {

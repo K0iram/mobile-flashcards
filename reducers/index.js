@@ -15,8 +15,8 @@ const decks = (state = {}, action) => {
     case SAVE_DECK_TITLE :
       return {
         ...state,
-        [action.title]: {
-          title: action.title,
+        [action.newDeck]: {
+          title: action.newDeck,
           questions: []
         }
       }
