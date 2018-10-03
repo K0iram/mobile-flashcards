@@ -1,13 +1,14 @@
 import React from 'react'
 import { Platform } from 'react-native'
-import { createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation'
+import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation'
 import { purple, white } from '../utils/colors'
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import AddCard from './AddCard'
 import AddDeck from './AddDeck'
 import Dashboard from './Dashboard'
+import DeckView from './DeckView'
 
-const Navigation = Platform.OS === 'ios' ?
+const Tabs = Platform.OS === 'ios' ?
   createBottomTabNavigator({
     Dashboard: {
       screen: Dashboard,
@@ -90,6 +91,33 @@ const Navigation = Platform.OS === 'ios' ?
        shadowOpacity: 1
      }
    }
+  })
+
+  const Navigation = createStackNavigator({
+    Home: {
+      screen: Tabs,
+      navigationOptions: {
+        header: null
+      }
+    },
+    DeckView: {
+      screen: DeckView,
+      navigationOptions: {
+        headerTintColor: white,
+        headerStyle: {
+          backgroundColor: purple
+        }
+      }
+    },
+    AddCard: {
+      screen: AddCard,
+      navigationOptions: {
+        headerTintColor: white,
+        headerStyle: {
+          backgroundColor: purple,
+        }
+      }
+    }
   })
 
 export default Navigation

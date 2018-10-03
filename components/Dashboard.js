@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import DeckCard from './DeckCard'
 import { connect } from 'react-redux'
 import { fetchDecks } from '../utils/api'
-import { AsyncStorage } from 'react-native'
-import { View, Text, StyleSheet, Platform } from 'react-native'
+import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { white } from '../utils/colors'
 
@@ -24,7 +23,15 @@ class Dashboard extends Component {
 
     return (
       <View>
-        {userDecks.map((deck) => <DeckCard key={deck.title} title={deck.title} questions={deck.questions}/>)}
+        {userDecks.map((deck) => (
+          <TouchableOpacity key={deck.title} onPress={() => this.props.navigation.navigate(
+            'DeckView',
+            { deckID: deck.title }
+          )}>
+            <DeckCard title={deck.title} questions={deck.questions}/>
+          </TouchableOpacity>
+          )
+        )}
       </View>
     )
   }

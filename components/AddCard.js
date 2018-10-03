@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, TextInput, StyleSheet, Text, Button, AsyncStorage } from 'react-native'
+import { View, TextInput, StyleSheet, Text } from 'react-native'
 import { submitCard } from '../utils/api'
 import { addCardToDeck } from '../actions'
 import { purple, white } from '../utils/colors'
@@ -42,14 +42,6 @@ class AddCard extends Component {
     })
   }
 
-  getItem = () => {
-    AsyncStorage.getItem('mobile-flashcards:decks').then((res) => console.log(res))
-  }
-
-  clear = () => {
-    AsyncStorage.clear()
-  }
-
   render() {
     const { question, answer } = this.state
     return (
@@ -71,9 +63,6 @@ class AddCard extends Component {
           <SubmitBtn onPress={this.addNewQuestion} disabled={!question || !answer}>
             Add Card
           </SubmitBtn>
-
-          <Button title='Async' onPress={this.getItem}/>
-          <Button title='Clear' onPress={this.clear}/>
         </View>
       </View>
     )
