@@ -21,11 +21,12 @@ const decks = (state = {}, action) => {
         }
       }
     case ADD_CARD_TO_DECK :
+      debugger
       return {
         ...state,
-        [action.title]: {
-          ...state[action.title],
-          questions: state[action.title].questions.concat(action.question)
+        [action.key]: {
+          title: state[action.key].title,
+          questions: [...state[action.key].questions, action.card]
         }
       }
     default :

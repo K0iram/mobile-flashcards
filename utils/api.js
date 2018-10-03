@@ -7,7 +7,7 @@ export const fetchDecks = () => {
 }
 
 export const addDeck = (key) => {
-  return AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify({
+  return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
     [key]: {
       title: key,
       questions: []
@@ -15,10 +15,12 @@ export const addDeck = (key) => {
   }))
 }
 
-export const submitCard = (key, card) => {
+export const submitCard = (key, card, cards) => {
+  let newQuestions = cards.concat(card)
   return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
     [key]: {
-      questions: card
+      title: key,
+      questions: newQuestions
     }
   }))
 }

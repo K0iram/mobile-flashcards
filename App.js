@@ -20,7 +20,7 @@ function FlashStatusBar ({backgroundColor, ...props}) {
 
 export default class App extends Component {
 
-  store = createStore(reducer)
+  store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
   render() {
     return (
