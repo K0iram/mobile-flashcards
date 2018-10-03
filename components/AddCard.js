@@ -9,6 +9,14 @@ import SubmitBtn from './SubmitBtn'
 
 
 class AddCard extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { deckID } = navigation.state.params
+
+    return {
+      title: `Add a card to: ${deckID}`
+    }
+  }
+
   state = {
     question: '',
     answer: ''
@@ -24,22 +32,23 @@ class AddCard extends Component {
 
   addNewQuestion = () => {
     const { question, answer } = this.state
-    const { onAddCard, decks } = this.props
+    const { onAddCard, decks, deckID, goBack } = this.props
 
-    let key = 'Javascript'
     let newCard = {
       question: question,
       answer: answer
     }
 
-    onAddCard(key, newCard)
+    onAddCard(deckID, newCard)
 
-    submitCard(key, newCard, decks[key].questions)
+    submitCard(deckID, newCard, decks[deckID].questions)
 
     this.setState({
       question: '',
       answer: ''
     })
+
+    goBack()
   }
 
   render() {
@@ -89,15 +98,18 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = (decks) => {
+const mapStateToProps = (decks, { navigation }) => {
+  const { deckID } = navigation.state.params
   return {
+    deckID,
     decks
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, { navigation }) => {
   return {
-    onAddCard: (title, card) => dispatch(addCardToDeck(title, card))
+    onAddCard: (title, card) => dispatch(addCardToDeck(title, card)),
+    goBack: () => navigation.goBack()
   }
 }
 

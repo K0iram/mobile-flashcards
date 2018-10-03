@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { white } from '../utils/colors'
-import TextBtn from './TextBtn'
+import SubmitBtn from './SubmitBtn'
 import QuestionCard from './QuestionCard'
 
 
@@ -25,11 +25,19 @@ class DeckView extends Component {
   }
 
   render() {
-    const { questions } = this.props
+    const { questions, deckID } = this.props
 
     if(questions.length < 1) {
       return (
-        <Text>There is not questions in this deck!</Text>
+        <View>
+          <Text>There is not questions in this deck!</Text>
+          <SubmitBtn onPress={() => this.props.navigation.navigate(
+              'AddCard',
+              { deckID: deckID }
+            )}>
+            Add A Card
+          </SubmitBtn>
+        </View>
 
       )
     }
@@ -37,6 +45,14 @@ class DeckView extends Component {
     return (
       <View style={styles.container}>
         {questions.map((q, i) => <QuestionCard key={i} answer={q.answer} question={q.question}/>)}
+        <View>
+          <SubmitBtn onPress={() => this.props.navigation.navigate(
+              'AddCard',
+              { deckID: deckID }
+          )}>
+            Add A Card
+          </SubmitBtn>
+        </View>
       </View>
     )
   }

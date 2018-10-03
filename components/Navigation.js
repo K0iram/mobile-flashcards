@@ -23,13 +23,6 @@ const Tabs = Platform.OS === 'ios' ?
         tabBarLabel: 'Add Deck',
         tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
       },
-    },
-    AddCard: {
-      screen: AddCard,
-      navigationOptions: {
-        tabBarLabel: 'Add Card',
-        tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
-      },
     }
   }, {
     navigationOptions: {
@@ -64,13 +57,6 @@ const Tabs = Platform.OS === 'ios' ?
      navigationOptions: {
        tabBarLabel: 'Add Deck',
        tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
-     },
-     AddCard: {
-       screen: AddCard,
-       navigationOptions: {
-         tabBarLabel: 'Add Card',
-         tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
-       },
      }
    },
   }, {
