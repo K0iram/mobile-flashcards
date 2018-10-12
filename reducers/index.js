@@ -1,4 +1,4 @@
-import {GET_DECKS, GET_DECK, ADD_CARD_TO_DECK, SAVE_DECK_TITLE} from '../actions'
+import {GET_DECKS, GET_DECK, ADD_CARD_TO_DECK, SAVE_DECK_TITLE, CREATE_QUIZ} from '../actions'
 
 const decks = (state = {}, action) => {
   switch (action.type) {
@@ -26,6 +26,13 @@ const decks = (state = {}, action) => {
         [action.key]: {
           title: state[action.key].title,
           questions: [...state[action.key].questions, action.card]
+        }
+      }
+    case CREATE_QUIZ :
+      return {
+        ...state,
+        [action.quizId]: {
+          ...action.quiz
         }
       }
     default :

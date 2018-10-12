@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, ScrollView, Text, StyleSheet, TouchableOpacity, AsyncStorage, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { white } from '../utils/colors'
+import { Ionicons } from '@expo/vector-icons'
 import SubmitBtn from './SubmitBtn'
 import QuestionCard from './QuestionCard'
 
@@ -29,14 +30,19 @@ class DeckView extends Component {
 
     if(questions.length < 1) {
       return (
-        <View>
-          <Text>There is not questions in this deck!</Text>
-          <SubmitBtn onPress={() => this.props.navigation.navigate(
-              'AddCard',
-              { deckID: deckID }
-            )}>
-            Add A Card
-          </SubmitBtn>
+        <View style={styles.container}>
+          <View style={styles.center}>
+            <Ionicons name={Platform.OS === 'ios' ? 'ios-sad-outline' : 'md-sad'} size={100}/>
+            <Text>There are no cards in this deck!</Text>
+          </View>
+          <View>
+            <SubmitBtn style={styles.btnContainer} onPress={() => this.props.navigation.navigate(
+                'AddCard',
+                { deckID: deckID }
+              )}>
+              Add A Card
+            </SubmitBtn>
+          </View>
         </View>
 
       )
@@ -44,13 +50,19 @@ class DeckView extends Component {
 
     return (
       <View style={styles.container}>
-        {questions.map((q, i) => <QuestionCard key={i} answer={q.answer} question={q.question}/>)}
-        <View>
-          <SubmitBtn onPress={() => this.props.navigation.navigate(
+        <ScrollView style={styles.cardContainer}>
+          <Text>Tap Cards To See The Answer</Text>
+          {questions.map((q, i) => <QuestionCard key={i} answer={q.answer} question={q.question}/>)}
+        </ScrollView>
+        <View style={styles.btnContainer}>
+          <SubmitBtn style={styles.btnPadding} onPress={() => this.props.navigation.navigate(
               'AddCard',
               { deckID: deckID }
           )}>
             Add A Card
+          </SubmitBtn>
+          <SubmitBtn onPress={() => AsyncStorage.clear()}>
+            Quiz Yourself
           </SubmitBtn>
         </View>
       </View>
@@ -60,10 +72,28 @@ class DeckView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 3,
     backgroundColor: white,
-    padding: 15
+    padding: 15,
   },
+  cardContainer: {
+    flex: 2,
+    backgroundColor: white
+  },
+  btnContainer: {
+    backgroundColor: white
+  },
+  btnSpace: {
+    marginBottom: 5,
+    marginTop: 5
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 30,
+    marginLeft: 30
+  }
 })
 
 const mapStateToProps = (state, { navigation }) => {

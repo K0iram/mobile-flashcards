@@ -1,21 +1,31 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform } from 'react-native'
 import { white } from '../utils/colors'
+import FlipCard from 'react-native-flip-card'
 
 
-const QuestionCard = ({question, answer}) => {
-  return (
-    <View style={styles.item}>
-      <View style={styles.card}>
-        <Text style={{fontSize: 20}}>
-          {question}
-        </Text>
-        <Text style={{fontSize: 20}}>
-          {answer}
-        </Text>
-      </View>
-    </View>
-  )
+class QuestionCard extends Component {
+  state = {
+    showAnswer: false
+  }
+
+  render() {
+    const { question, answer } = this.props
+    return (
+      <FlipCard style={styles.item}>
+        <View>
+          <Text style={{fontSize: 20}}>
+            {question}
+          </Text>
+        </View>
+        <View>
+          <Text style={{fontSize: 20}}>
+            {answer}
+          </Text>
+        </View>
+      </FlipCard>
+    )
+  }
 }
 
 const styles = StyleSheet.create({

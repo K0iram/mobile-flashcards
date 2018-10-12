@@ -8,7 +8,6 @@ import { purple, white } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
 
 
-
 class AddDeck extends Component {
   state = {
     deckTitle: ''
@@ -20,7 +19,7 @@ class AddDeck extends Component {
 
   addNewDeck = () => {
     const { deckTitle } = this.state
-    const { onSubmit } = this.props
+    const { onSubmit, navigation } = this.props
 
     onSubmit(deckTitle)
 
@@ -30,7 +29,10 @@ class AddDeck extends Component {
 
     this.setState({deckTitle: ''})
 
-    //Redirect to home on submit
+    navigation.navigate(
+      'DeckView',
+      { deckID: deckTitle }
+    )
   }
 
   render() {
