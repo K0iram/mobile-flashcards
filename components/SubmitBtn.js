@@ -2,14 +2,14 @@ import React from 'react'
 import { Text, TouchableOpacity, StyleSheet, Platform } from 'react-native'
 import { white, purple } from '../utils/colors'
 
-const SubmitBtn = ({ children, onPress, disabled }) => {
+const SubmitBtn = ({ children, onPress, disabled, width }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
       disabled={disabled}
       style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
     >
-      <Text style={styles.submitBtnTxt}>
+      <Text style={[styles.submitBtnTxt, width]}>
         {children}
       </Text>
     </TouchableOpacity>

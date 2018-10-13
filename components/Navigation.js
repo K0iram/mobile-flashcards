@@ -4,6 +4,7 @@ import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNav
 import { purple, white } from '../utils/colors'
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import AddCard from './AddCard'
+import Quiz from './Quiz'
 import AddDeck from './AddDeck'
 import Dashboard from './Dashboard'
 import DeckView from './DeckView'
@@ -97,6 +98,15 @@ const Tabs = Platform.OS === 'ios' ?
     },
     AddCard: {
       screen: AddCard,
+      navigationOptions: {
+        headerTintColor: white,
+        headerStyle: {
+          backgroundColor: purple,
+        }
+      }
+    },
+    Quiz: {
+      screen: Quiz,
       navigationOptions: {
         headerTintColor: white,
         headerStyle: {

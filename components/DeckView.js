@@ -22,7 +22,19 @@ class DeckView extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    return nextProps.question !== null
+    return nextProps.questions !== null
+  }
+
+  onCreateQuiz = () => {
+    const { navigation, deckID, questions } = this.props
+
+    navigation.navigate(
+      'Quiz',
+      {
+        deckID: deckID,
+        questions: questions
+      }
+    )
   }
 
   render() {
@@ -61,7 +73,7 @@ class DeckView extends Component {
           )}>
             Add A Card
           </SubmitBtn>
-          <SubmitBtn onPress={() => AsyncStorage.clear()}>
+          <SubmitBtn onPress={this.onCreateQuiz}>
             Quiz Yourself
           </SubmitBtn>
         </View>
