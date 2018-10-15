@@ -3,6 +3,7 @@ import { View, ScrollView, Text, StyleSheet, TouchableOpacity, AsyncStorage, Pla
 import { connect } from 'react-redux'
 import { white } from '../utils/colors'
 import { Ionicons } from '@expo/vector-icons'
+import { addQuiz } from '../utils/api'
 import SubmitBtn from './SubmitBtn'
 import QuestionCard from './QuestionCard'
 
@@ -16,17 +17,19 @@ class DeckView extends Component {
     }
   }
 
-  reset = () => {
-    const { goBack, deckID } = this.props
-    goBack()
-  }
-
   shouldComponentUpdate (nextProps) {
     return nextProps.questions !== null
   }
 
   onCreateQuiz = () => {
-    const { navigation, deckID, questions } = this.props
+    const { navigation, deckID, questions, quizes } = this.props
+    const newQuiz = {
+      deck: deckID,
+      timeStamp: Date.now(),
+      correctAnswers: 0
+    }
+
+    addQuiz(deckID, newQuiz, quizes)
 
     navigation.navigate(
       'Quiz',
@@ -108,12 +111,13 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = (state, { navigation }) => {
+const mapStateToProps = (decks, { navigation }) => {
   const { deckID } = navigation.state.params
 
   return {
     deckID,
-    questions: state[deckID].questions,
+    questions: decks[deckID].questions,
+    quizes: decks[deckID].quizes
   }
 }
 

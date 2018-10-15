@@ -8,6 +8,10 @@ import { white } from '../utils/colors'
 
 
 class Dashboard extends Component {
+  //Only for Development
+  reset = () => {
+    AsyncStorage.clear()
+  }
 
   render() {
     const { userDecks } = this.props
@@ -17,6 +21,9 @@ class Dashboard extends Component {
         <View style={styles.center}>
           <Ionicons name={Platform.OS === 'ios' ? 'ios-sad-outline' : 'md-sad'} size={100}/>
           <Text>You Don't Have Any Decks Yet</Text>
+          <TouchableOpacity onPress={this.reset}>
+            <Text>Reset AsyncStorage</Text>
+          </TouchableOpacity>
         </View>
       )
     }

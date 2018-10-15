@@ -1,12 +1,13 @@
 import './ReactotronConfig'
 import React, { Component } from 'react'
-import { View, StatusBar, StyleSheet } from 'react-native'
+import { View, StatusBar, StyleSheet, AsyncStorage } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import { purple } from './utils/colors'
 import { Constants } from 'expo'
 import Navigation from './components/Navigation'
+import { DECKS_STORAGE_KEY, QUIZ_STORAGE_KEY } from './utils/api'
 
 
 
@@ -19,7 +20,6 @@ function FlashStatusBar ({backgroundColor, ...props}) {
 }
 
 export default class App extends Component {
-
   store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
   render() {
