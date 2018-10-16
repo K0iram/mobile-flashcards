@@ -9,27 +9,36 @@ class Quiz extends Component {
     super(props)
       this.state = {
         step: 0,
+        correct: 0,
         quizReady: false,
         quizFinished: false,
         questions: props.navigation.state.params.questions
       }
   }
 
-  nextQuestion = () => {
+  onCorrect = () => {
     const { step, questions } = this.state
-    const currentQ = questions[step]
-
     if(questions.length === (step + 1) && questions.length >= 1) {
       this.setState({
         quizFinished: true
       })
     }
-
-    // Set state to next index
     this.setState((prevState) => ({
-      step: prevState.step + 1
+      step: prevState.step + 1,
+      correct: prevState.correct + 1
     }))
+  }
 
+  onIncorrect = () => {
+    const { step, questions } = this.state
+    if(questions.length === (step + 1) && questions.length >= 1) {
+      this.setState({
+        quizFinished: true
+      })
+    }
+    this.setState((prevState) => ({
+      step: prevState.step + 1,
+    }))
   }
 
   startQuiz = () => {
@@ -56,9 +65,9 @@ class Quiz extends Component {
 
     if(this.state.quizFinished) {
       return (
-        <View>
+        <View style={styles.center}>
           <Text>
-            YOUR FINISHED
+            You got {this.state.correct} out of {this.state.questions.length} Correct!
           </Text>
         </View>
       )
@@ -71,8 +80,8 @@ class Quiz extends Component {
           <FlipCard answer={currentQ.answer} question={currentQ.question}/>
         </View>
         <View style={styles.questionContainer}>
-          <SubmitBtn width={styles.buttonSize} onPress={this.nextQuestion}>Correct</SubmitBtn>
-          <SubmitBtn width={styles.buttonSize} onPress={this.nextQuestion}>Incorrect</SubmitBtn>
+          <SubmitBtn width={styles.buttonSize} onPress={this.onCorrect}>Correct</SubmitBtn>
+          <SubmitBtn width={styles.buttonSize} onPress={this.onIncorrect}>Incorrect</SubmitBtn>
         </View>
       </View>
     )
