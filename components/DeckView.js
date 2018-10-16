@@ -5,7 +5,7 @@ import { white } from '../utils/colors'
 import { Ionicons } from '@expo/vector-icons'
 import { addQuiz } from '../utils/api'
 import SubmitBtn from './SubmitBtn'
-import QuestionCard from './QuestionCard'
+import FlipCard from './FlipCard'
 
 
 class DeckView extends Component {
@@ -67,7 +67,7 @@ class DeckView extends Component {
       <View style={styles.container}>
         <ScrollView style={styles.cardContainer}>
           <Text>Tap Cards To See The Answer</Text>
-          {questions.map((q, i) => <QuestionCard key={i} answer={q.answer} question={q.question}/>)}
+          {questions.map((q, i) => <FlipCard key={i} answer={q.answer} question={q.question}/>)}
         </ScrollView>
         <View style={styles.btnContainer}>
           <SubmitBtn style={styles.btnPadding} onPress={() => this.props.navigation.navigate(

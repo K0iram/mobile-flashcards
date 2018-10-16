@@ -1,28 +1,35 @@
 import React, { Component } from 'react'
 import { View, ScrollView, Text, AsyncStorage, StyleSheet  } from 'react-native'
-import QuestionCard from './QuestionCard'
 import SubmitBtn from './SubmitBtn'
+import FlipCard from './FlipCard'
 
 
 class Quiz extends Component {
-  state = {
-    step: 0,
-    quizReady: false,
-    quizFinished: false
+  constructor(props) {
+    super(props)
+      this.state = {
+        step: 0,
+        quizReady: false,
+        quizFinished: false,
+        questions: props.navigation.state.params.questions
+      }
   }
 
   nextQuestion = () => {
-    const q = this.props.navigation.state.params.questions
-    // Update Redux Store
-    // Update AsyncStorage
-    if(q.length >= this.state.step){
-      this.setState({quizFinished: true})
+    const { step, questions } = this.state
+    const currentQ = questions[step]
+
+    if(questions.length === (step + 1) && questions.length >= 1) {
+      this.setState({
+        quizFinished: true
+      })
     }
 
     // Set state to next index
     this.setState((prevState) => ({
       step: prevState.step + 1
     }))
+
   }
 
   startQuiz = () => {
@@ -30,9 +37,8 @@ class Quiz extends Component {
   }
 
   render() {
-    const q = this.props.navigation.state.params.questions
-    const { step } = this.state
-    const currentQ = q[step]
+    const { step, questions } = this.state
+    const currentQ = questions[step]
 
     if(!this.state.quizReady) {
       return (
@@ -59,10 +65,10 @@ class Quiz extends Component {
     }
 
     return (
-      <View>
-        <Text>Question: {step} of {q.length}</Text>
-        <View>
-          <QuestionCard answer={currentQ.answer} question={currentQ.question}/>
+      <View style={styles.container}>
+        <Text>Question: {step + 1} of {questions.length}</Text>
+        <View style={{height: 500}}>
+          <FlipCard answer={currentQ.answer} question={currentQ.question}/>
         </View>
         <View style={styles.questionContainer}>
           <SubmitBtn width={styles.buttonSize} onPress={this.nextQuestion}>Correct</SubmitBtn>
@@ -74,6 +80,11 @@ class Quiz extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 15,
+  },
   center: {
     flex: 3,
     justifyContent: 'center',
