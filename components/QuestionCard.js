@@ -5,9 +5,6 @@ import FlipCard from 'react-native-flip-card'
 
 
 class QuestionCard extends Component {
-  state = {
-    showAnswer: false
-  }
 
   render() {
     const { question, answer } = this.props

@@ -18,7 +18,7 @@ const decks = (state = {}, action) => {
         [action.newDeck]: {
           title: action.newDeck,
           questions: [],
-          quizes: []
+          quiz: {}
         }
       }
     case ADD_CARD_TO_DECK :
@@ -33,7 +33,7 @@ const decks = (state = {}, action) => {
       return {
         ...state,
         [action.quizId]: {
-          ...action.quiz
+          quiz: action.quiz
         }
       }
     default :

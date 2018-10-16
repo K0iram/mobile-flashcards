@@ -11,7 +11,7 @@ export const addDeck = (key) => {
     [key]: {
       title: key,
       questions: [],
-      quizes: []
+      quiz: {}
     }
   }))
 }
@@ -36,11 +36,18 @@ export const removeEntry = (key) => {
     })
 }
 
-export const addQuiz = (key, quiz, pastQuizes) => {
-  let newQuizes = pastQuizes ? pastQuizes.concat(quiz) : [ quiz ]
+export const addQuiz = (key, quiz) => {
   return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
     [key]: {
-      quizes: newQuizes
+      quiz: quiz
+    }
+  }))
+}
+
+export const updateCorrect = (key, answers) => {
+  return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
+    [key]: {
+      quiz: answers
     }
   }))
 }
