@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { white } from '../utils/colors'
 import { Ionicons } from '@expo/vector-icons'
 import { addQuiz } from '../utils/api'
+import { createNewQuiz } from '../actions'
 import SubmitBtn from './SubmitBtn'
 import FlipCard from './FlipCard'
 
@@ -22,7 +23,7 @@ class DeckView extends Component {
   }
 
   onCreateQuiz = () => {
-    const { navigation, deckID, questions, quizes } = this.props
+    const { navigation, deckID, questions, quizes, onCreateQuiz} = this.props
     const newQuiz = {
       deck: deckID,
       timeStamp: Date.now(),
@@ -30,6 +31,7 @@ class DeckView extends Component {
     }
 
     addQuiz(deckID, newQuiz, quizes)
+    onCreateQuiz(deckID, newQuiz)
 
     navigation.navigate(
       'Quiz',
@@ -126,6 +128,7 @@ const mapDispatchToProps = (dispatch, { navigation }) => {
 
   return {
     goBack: () => navigation.goBack(),
+    onCreateQuiz: (id, quiz) => dispatch(createNewQuiz(id, quiz))
   }
 }
 

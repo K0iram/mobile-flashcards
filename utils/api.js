@@ -44,10 +44,12 @@ export const addQuiz = (key, quiz) => {
   }))
 }
 
-export const updateCorrect = (key, answers) => {
+export const updateCorrectAnswers = (key, answers) => {
   return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
     [key]: {
-      quiz: answers
+      quiz: {
+        correctAnswers: answers
+      }
     }
   }))
 }

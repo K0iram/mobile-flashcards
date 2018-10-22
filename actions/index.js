@@ -3,7 +3,8 @@ export const GET_DECK = 'GET_DECK'
 export const SAVE_DECK_TITLE = 'SAVE_DECK_TITLE'
 export const ADD_CARD_TO_DECK = 'ADD_CARD_TO_DECK'
 export const CREATE_QUIZ = 'CREATE_QUIZ'
-export const ANSWER_QUESTION = 'ANSWER_QUESTION'
+export const UPDATE_ANSWERS = 'UPDATE_ANSWERS'
+
 
 
 export const getDecks = (decks) => {
@@ -40,5 +41,13 @@ export const createNewQuiz = (quizId, quiz) => {
     type: CREATE_QUIZ,
     quizId,
     quiz
+  }
+}
+
+export const updateAnswers = (quizId, answers) => {
+  return {
+    type: UPDATE_ANSWERS,
+    quizId,
+    answers
   }
 }
