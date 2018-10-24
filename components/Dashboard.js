@@ -16,7 +16,7 @@ class Dashboard extends Component {
   render() {
     const { userDecks } = this.props
 
-    if(userDecks.length < 1) {
+    if(userDecks && userDecks.length < 1) {
       return (
         <View style={styles.center}>
           <Ionicons name={Platform.OS === 'ios' ? 'ios-sad-outline' : 'md-sad'} size={100}/>
@@ -54,9 +54,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = (decks) => {
+const mapStateToProps = (state) => {
   return {
-    userDecks: decks ? Object.values(decks) : []
+    userDecks: state.decks ? Object.values(state.decks) : []
   }
 }
 

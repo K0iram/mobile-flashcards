@@ -98,11 +98,11 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = (decks, { navigation }) => {
+const mapStateToProps = (state, { navigation }) => {
   const { deckID } = navigation.state.params
   return {
     deckID,
-    decks
+    decks: state.decks
   }
 }
 

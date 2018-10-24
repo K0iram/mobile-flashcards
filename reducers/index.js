@@ -1,4 +1,12 @@
-import {GET_DECKS, GET_DECK, ADD_CARD_TO_DECK, SAVE_DECK_TITLE, CREATE_QUIZ, UPDATE_ANSWERS} from '../actions'
+import {
+  GET_DECKS,
+  GET_DECK,
+  ADD_CARD_TO_DECK,
+  SAVE_DECK_TITLE,
+  CREATE_QUIZ,
+  UPDATE_ANSWERS
+} from '../actions'
+import { combineReducers } from 'redux';
 
 const decks = (state = {}, action) => {
   switch (action.type) {
@@ -53,5 +61,7 @@ const decks = (state = {}, action) => {
   }
 }
 
-export default decks
+export default combineReducers({
+  decks
+})
 

@@ -5,8 +5,6 @@ export const ADD_CARD_TO_DECK = 'ADD_CARD_TO_DECK'
 export const CREATE_QUIZ = 'CREATE_QUIZ'
 export const UPDATE_ANSWERS = 'UPDATE_ANSWERS'
 
-
-
 export const getDecks = (decks) => {
   return {
     type: GET_DECKS,

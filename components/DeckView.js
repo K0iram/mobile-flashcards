@@ -113,13 +113,13 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = (decks, { navigation }) => {
+const mapStateToProps = (state, { navigation }) => {
   const { deckID } = navigation.state.params
 
   return {
     deckID,
-    questions: decks[deckID].questions,
-    quizes: decks[deckID].quizes
+    questions: state.decks[deckID].questions,
+    quizes: state.decks[deckID].quizes
   }
 }
 

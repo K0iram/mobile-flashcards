@@ -37,7 +37,6 @@ class Quiz extends Component {
   }
 
   onCorrect = () => {
-    debugger
     const { step, questions, correct } = this.state
     const hasQuestions = questions.length >= 1
     const stepLength = step + 1

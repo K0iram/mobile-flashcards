@@ -1,17 +1,15 @@
-import './ReactotronConfig'
 import React, { Component } from 'react'
-import { View, StatusBar, StyleSheet, AsyncStorage } from 'react-native'
+import { View, StatusBar, StyleSheet, ActivityIndicator } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import { purple } from './utils/colors'
 import { Constants } from 'expo'
 import Navigation from './components/Navigation'
-import { DECKS_STORAGE_KEY, QUIZ_STORAGE_KEY } from './utils/api'
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './store';
 
-
-
-function FlashStatusBar ({backgroundColor, ...props}) {
+FlashStatusBar = ({backgroundColor, ...props}) => {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
@@ -19,18 +17,26 @@ function FlashStatusBar ({backgroundColor, ...props}) {
   )
 }
 
+
 export default class App extends Component {
-  store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+  renderLoading = () => (
+    <View style={styles.container}>
+      <ActivityIndicator size="large" />
+    </View>
+  )
 
   render() {
     return (
-      <Provider store={this.store}>
-        <View style={{flex: 1}}>
-          <FlashStatusBar backgroundColor={purple} barStyle="light-content" />
-          <Navigation />
-        </View>
+      <Provider store={store}>
+        <PersistGate persistor={persistor} loading={this.renderLoading()}>
+          <View style={{flex: 1}}>
+            <FlashStatusBar backgroundColor={purple} barStyle="light-content" />
+            <Navigation />
+          </View>
+        </PersistGate>
       </Provider>
-    )
+    );
   }
 }
 
