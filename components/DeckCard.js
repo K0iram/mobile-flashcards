@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Platform } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { gray, white } from '../utils/colors'
 
 
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: white,
-    borderRadius: Platform.OS === 'ios' ? 10 : 2,
+    borderRadius: 10,
     padding: 20,
     marginTop: 17,
     marginRight: 10,

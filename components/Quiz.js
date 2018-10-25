@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, ScrollView, Text, AsyncStorage, StyleSheet, Platform } from 'react-native'
+import { View, ScrollView, Text, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { updateAnswers } from '../actions'
 import { updateCorrectAnswers } from '../utils/api'

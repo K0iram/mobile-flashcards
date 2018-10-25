@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, StyleSheet, TouchableOpacity, AsyncStorage, Platform } from 'react-native'
+import { View, ScrollView, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { white } from '../utils/colors'
 import { Ionicons } from '@expo/vector-icons'
@@ -49,7 +49,7 @@ class DeckView extends Component {
       return (
         <View style={styles.container}>
           <View style={styles.center}>
-            <Ionicons name={Platform.OS === 'ios' ? 'ios-sad-outline' : 'md-sad'} size={100}/>
+            <Ionicons name={'ios-sad-outline'} size={100}/>
             <Text>There are no cards in this deck!</Text>
           </View>
           <View>

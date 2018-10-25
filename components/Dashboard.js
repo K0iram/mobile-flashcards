@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import DeckCard from './DeckCard'
 import { connect } from 'react-redux'
-import { fetchDecks } from '../utils/api'
-import { View, Text, StyleSheet, Platform, TouchableOpacity, AsyncStorage} from 'react-native'
+import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { white } from '../utils/colors'
 

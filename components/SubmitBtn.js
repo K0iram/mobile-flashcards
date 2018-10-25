@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TouchableOpacity, StyleSheet, Platform } from 'react-native'
+import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { white, purple } from '../utils/colors'
 
 const SubmitBtn = ({ children, onPress, disabled, width }) => {
@@ -7,7 +7,7 @@ const SubmitBtn = ({ children, onPress, disabled, width }) => {
     <TouchableOpacity
       onPress={onPress}
       disabled={disabled}
-      style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+      style={styles.iosSubmitBtn}
     >
       <Text style={[styles.submitBtnTxt, width]}>
         {children}
@@ -25,17 +25,6 @@ const styles = StyleSheet.create({
     marginRight: 40,
     marginLeft: 40,
     marginBottom: 10
-  },
-  androidSubmitBtn: {
-    backgroundColor: purple,
-    padding: 10,
-    borderRadius: 2,
-    height: 45,
-    paddingRight: 30,
-    paddingLeft: 30,
-    alignSelf: 'flex-end',
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   submitBtnTxt: {
     color: white,

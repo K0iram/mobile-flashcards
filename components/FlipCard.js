@@ -1,22 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  Animated,
-  Platform
-} from 'react-native';
+  Animated
+} from 'react-native'
 import SubmitBtn from './SubmitBtn'
 
 class FlipCard extends Component {
 
   UNSAFE_componentWillMount() {
-    this.animatedValue = new Animated.Value(0);
-    this.value = 0;
+    this.animatedValue = new Animated.Value(0)
+    this.value = 0
     this.animatedValue.addListener(({ value }) => {
-      this.value = value;
+      this.value = value
     })
     this.frontInterpolate = this.animatedValue.interpolate({
       inputRange: [0, 180],
@@ -34,13 +32,13 @@ class FlipCard extends Component {
         toValue: 0,
         friction: 8,
         tension: 10
-      }).start();
+      }).start()
     } else {
       Animated.spring(this.animatedValue,{
         toValue: 180,
         friction: 8,
         tension: 10
-      }).start();
+      }).start()
     }
 
   }
@@ -73,7 +71,7 @@ class FlipCard extends Component {
           </Animated.View>
         </TouchableOpacity>
       </View>
-    );
+    )
   }
 }
 
@@ -86,7 +84,7 @@ const styles = StyleSheet.create({
   flipCard: {
     width: 300,
     backgroundColor: '#fff',
-    borderRadius: Platform.OS === 'ios' ? 10 : 2,
+    borderRadius: 10,
     padding: 20,
     marginTop: 17,
     marginRight: 10,
@@ -111,7 +109,7 @@ const styles = StyleSheet.create({
     color: '#888',
     fontWeight: 'bold',
   }
-});
+})
 
 export default FlipCard
 
