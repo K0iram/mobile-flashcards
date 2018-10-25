@@ -67,8 +67,11 @@ class DeckView extends Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.cardContainer}>
+        <View style={styles.infoBox}>
           <Text>Tap Cards To See The Answer</Text>
+          <Text># of Cards: {questions.length}</Text>
+        </View>
+        <ScrollView style={styles.cardContainer}>
           {questions.map((q, i) => <FlipCard key={i} answer={q.answer} question={q.question}/>)}
         </ScrollView>
         <View style={styles.btnContainer}>
@@ -110,6 +113,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 30,
     marginLeft: 30
+  },
+  infoBox: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 })
 

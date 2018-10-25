@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TextInput, StyleSheet, Text } from 'react-native'
+import { View, TextInput, StyleSheet, Text, AsyncStorage } from 'react-native'
 import { connect } from 'react-redux'
 import { saveDeckTitle } from '../actions'
 import { NavigationActions } from 'react-navigation'
@@ -11,6 +11,10 @@ import SubmitBtn from './SubmitBtn'
 class AddDeck extends Component {
   state = {
     deckTitle: ''
+  }
+  //Only for Development
+  reset = () => {
+    AsyncStorage.clear()
   }
 
   inputChange = (deckTitle) => {
@@ -48,6 +52,9 @@ class AddDeck extends Component {
           />
           <SubmitBtn onPress={this.addNewDeck}>
             Add Deck
+          </SubmitBtn>
+          <SubmitBtn onPress={this.reset}>
+            Reset
           </SubmitBtn>
         </View>
       </View>

@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, ScrollView, Text, AsyncStorage, StyleSheet  } from 'react-native'
+import { View, ScrollView, Text, AsyncStorage, StyleSheet, Platform } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import { updateAnswers } from '../actions'
 import { updateCorrectAnswers } from '../utils/api'
 import SubmitBtn from './SubmitBtn'
+import TextBtn from './TextBtn'
 import FlipCard from './FlipCard'
 
 
@@ -26,6 +28,15 @@ class Quiz extends Component {
   finishQuiz = () => {
     this.setState({quizFinished: true})
     this.submitAnswer()
+  }
+
+  resetQuiz = () => {
+    this.setState({
+      step: 0,
+      correct: 0,
+      quizReady: false,
+      quizFinished: false
+    })
   }
 
   submitAnswer = () => {
@@ -70,7 +81,7 @@ class Quiz extends Component {
 
   render() {
     const { step, questions, correct } = this.state
-    const { deckID, onUpdateAnswers } = this.props
+    const { deckID, onUpdateAnswers, goBack } = this.props
     const currentQ = questions[step]
 
     if(!this.state.quizReady) {
@@ -90,9 +101,15 @@ class Quiz extends Component {
     if(this.state.quizFinished) {
       return (
         <View style={styles.center}>
+          <Ionicons name={correct > 0 ? 'ios-happy-outline' : 'ios-sad-outline'} size={100}/>
           <Text>
             You got {correct} out of {questions.length} Correct!
           </Text>
+          <View style={styles.row}>
+            <TextBtn onPress={this.resetQuiz}>Try Again?</TextBtn>
+            <Text>OR</Text>
+            <TextBtn onPress={goBack}>Study More!</TextBtn>
+          </View>
         </View>
       )
     }
@@ -137,6 +154,12 @@ const styles = StyleSheet.create({
   },
   buttonSize: {
     width: 100
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 200,
+    marginTop: 20
   }
 })
 
