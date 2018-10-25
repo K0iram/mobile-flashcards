@@ -6,8 +6,9 @@ import reducer from './reducers'
 import { purple } from './utils/colors'
 import { Constants } from 'expo'
 import Navigation from './components/Navigation'
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './store';
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from './store'
+import { setLocalNotification } from './utils/notifications'
 
 FlashStatusBar = ({backgroundColor, ...props}) => {
   return (
@@ -18,7 +19,10 @@ FlashStatusBar = ({backgroundColor, ...props}) => {
 }
 
 
-export default class App extends Component {
+class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
 
   renderLoading = () => (
     <View style={styles.container}>
@@ -48,3 +52,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App

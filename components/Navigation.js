@@ -6,12 +6,12 @@ import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import AddCard from './AddCard'
 import Quiz from './Quiz'
 import AddDeck from './AddDeck'
-import Dashboard from './Dashboard'
+import Home from './Home'
 import DeckView from './DeckView'
 
   const Tabs = createBottomTabNavigator({
-    Dashboard: {
-      screen: Dashboard,
+    Home: {
+      screen: Home,
       navigationOptions: {
         tabBarLabel: 'Your Decks',
         tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons name='cards-outline' size={30} color={tintColor} />
@@ -25,9 +25,6 @@ import DeckView from './DeckView'
       },
     }
   }, {
-    navigationOptions: {
-      header: null
-    },
     tabBarOptions: {
       activeTintColor: purple,
       style: {
@@ -44,11 +41,23 @@ import DeckView from './DeckView'
     }
   })
 
+  Tabs.navigationOptions = ({ navigation }) => {
+    const { routeName } = navigation.state.routes[navigation.state.index]
+    const headerTitle = routeName
+
+    return {
+      headerTitle,
+    }
+  }
+
   const Navigation = createStackNavigator({
     Home: {
       screen: Tabs,
       navigationOptions: {
-        header: null
+        headerTintColor: white,
+        headerStyle: {
+          backgroundColor: purple
+        }
       }
     },
     DeckView: {

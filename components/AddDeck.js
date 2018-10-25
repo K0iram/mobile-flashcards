@@ -9,6 +9,10 @@ import SubmitBtn from './SubmitBtn'
 
 
 class AddDeck extends Component {
+  componentDidMount() {
+    this.props.navigation.setParams({title: "Add Deck"})
+  }
+
   state = {
     deckTitle: ''
   }
@@ -38,6 +42,7 @@ class AddDeck extends Component {
   }
 
   render() {
+    console.log(this.props.navigation)
     return (
       <View style={styles.container}>
         <Text style={styles.header}> Add A New Deck </Text>

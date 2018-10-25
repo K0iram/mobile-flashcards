@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, ScrollView, Text, StyleSheet } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
 import { updateAnswers } from '../actions'
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
 import { updateCorrectAnswers } from '../utils/api'
+import { Ionicons } from '@expo/vector-icons'
 import SubmitBtn from './SubmitBtn'
 import TextBtn from './TextBtn'
 import FlipCard from './FlipCard'
@@ -28,6 +29,8 @@ class Quiz extends Component {
   finishQuiz = () => {
     this.setState({quizFinished: true})
     this.submitAnswer()
+    clearLocalNotification()
+      .then(setLocalNotification)
   }
 
   resetQuiz = () => {

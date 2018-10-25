@@ -6,7 +6,10 @@ import { Ionicons } from '@expo/vector-icons'
 import { white } from '../utils/colors'
 
 
-class Dashboard extends Component {
+class Home extends Component {
+  componentDidMount() {
+    this.props.navigation.setParams({title: "Home"})
+  }
 
   render() {
     const { userDecks } = this.props
@@ -52,4 +55,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Dashboard)
+export default connect(mapStateToProps)(Home)
