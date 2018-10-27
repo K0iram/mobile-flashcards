@@ -12,10 +12,6 @@ class AddDeck extends Component {
   state = {
     deckTitle: ''
   }
-  //Only for Development
-  reset = () => {
-    AsyncStorage.clear()
-  }
 
   inputChange = (deckTitle) => {
     this.setState({deckTitle})
@@ -55,9 +51,6 @@ class AddDeck extends Component {
           />
           <SubmitBtn onPress={this.addNewDeck} disabled={deckTitle === ''}>
             Add Deck
-          </SubmitBtn>
-          <SubmitBtn onPress={this.reset}>
-            Reset
           </SubmitBtn>
         </View>
       </View>
