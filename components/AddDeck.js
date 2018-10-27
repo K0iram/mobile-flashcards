@@ -38,6 +38,7 @@ class AddDeck extends Component {
   }
 
   render() {
+    const { deckTitle } = this.state
     return (
       <View style={styles.container}>
         <Text style={styles.header}> Add A New Deck </Text>
@@ -45,10 +46,10 @@ class AddDeck extends Component {
           <TextInput
             placeholder="New Deck Title"
             style={styles.userInput}
-            value={this.state.deckTitle}
+            value={deckTitle}
             onChangeText={this.inputChange}
           />
-          <SubmitBtn onPress={this.addNewDeck}>
+          <SubmitBtn onPress={this.addNewDeck} disabled={deckTitle === ''}>
             Add Deck
           </SubmitBtn>
           <SubmitBtn onPress={this.reset}>
