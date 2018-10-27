@@ -10,16 +10,6 @@ import { combineReducers } from 'redux';
 
 const decks = (state = {}, action) => {
   switch (action.type) {
-    case GET_DECKS :
-      return {
-        ...state,
-        ...action.decks
-      }
-    case GET_DECK :
-      return {
-        ...state,
-        ...action.deck
-      }
     case SAVE_DECK_TITLE :
       return {
         ...state,

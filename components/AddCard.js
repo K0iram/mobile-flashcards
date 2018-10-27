@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { View, TextInput, StyleSheet, Text } from 'react-native'
 import { submitCard } from '../utils/api'
 import { addCardToDeck } from '../actions'
-import { purple, white } from '../utils/colors'
+import { purple, white, gray, red } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
 
 
@@ -19,15 +19,29 @@ class AddCard extends Component {
 
   state = {
     question: '',
-    answer: ''
+    answer: '',
+    qLength: 0,
+    aLength: 0
   }
 
   onQuestionChange = (question) => {
-    this.setState({question: question})
+    if(this.state.qLength >= 30) {
+      return alert("Question can only be 30 characters long")
+    }
+    this.setState({
+      question: question,
+      qLength: question.length
+    })
   }
 
   onAnswerChange = (answer) => {
-    this.setState({answer: answer})
+    if(this.state.aLength >= 150) {
+      return alert("Answer can only be 150 characters long")
+    }
+    this.setState({
+      answer: answer,
+      aLength: answer.length
+    })
   }
 
   addNewQuestion = () => {
@@ -52,23 +66,29 @@ class AddCard extends Component {
   }
 
   render() {
-    const { question, answer } = this.state
+    const { question, answer, qLength, aLength } = this.state
     return (
       <View style={styles.container}>
         <Text style={styles.header}> Add A New Question Card </Text>
         <View>
-          <TextInput
-            placeholder="New Question"
-            style={styles.userInput}
-            value={this.state.question}
-            onChangeText={this.onQuestionChange}
-          />
-          <TextInput
-            placeholder="New Answer"
-            style={styles.userInput}
-            value={this.state.answer}
-            onChangeText={this.onAnswerChange}
-          />
+          <View>
+            <Text style={[styles.cardLength, {color: qLength >= 30 ? red : gray}]}>{`${qLength}/30`}</Text>
+            <TextInput
+              placeholder="New Question"
+              style={styles.userInput}
+              value={this.state.question}
+              onChangeText={this.onQuestionChange}
+            />
+          </View>
+          <View>
+            <Text style={[styles.cardLength, {color: aLength >= 150 ? red : gray}]}>{`${aLength}/150`}</Text>
+            <TextInput
+              placeholder="New Answer"
+              style={styles.userInput}
+              value={this.state.answer}
+              onChangeText={this.onAnswerChange}
+            />
+          </View>
           <SubmitBtn onPress={this.addNewQuestion} disabled={!question || !answer}>
             Add Card
           </SubmitBtn>
@@ -95,6 +115,12 @@ const styles = StyleSheet.create({
     padding: 30,
     textAlign: 'center',
     fontWeight: 'bold'
+  },
+  cardLength: {
+    width: '100%',
+    textAlign: 'right',
+    fontSize: 12,
+    paddingRight: 10
   }
 })
 

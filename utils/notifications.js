@@ -11,7 +11,7 @@ export const clearLocalNotification = () => {
 
 createNotification = () => {
   return {
-    title: 'Study Alert!',
+    title: 'Study Time Mobile Alert!',
     body: '👋 Don\'t forget to study today!!',
     ios: {
       sound: true

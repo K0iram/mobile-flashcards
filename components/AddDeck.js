@@ -23,7 +23,11 @@ class AddDeck extends Component {
 
   addNewDeck = () => {
     const { deckTitle } = this.state
-    const { onSubmit, navigation } = this.props
+    const { onSubmit, navigation, deckKeys } = this.props
+
+    if(deckKeys.includes(deckTitle.toLowerCase())) {
+      return alert('That Deck Exists Try Another!')
+    }
 
     onSubmit(deckTitle)
 
@@ -81,9 +85,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = (decks) => {
+const mapStateToProps = ({decks}) => {
   return {
-    decks
+    deckKeys: Object.keys(decks).map((deck) => deck.toLowerCase())
   }
 }
 

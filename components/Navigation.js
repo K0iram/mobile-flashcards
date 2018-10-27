@@ -41,13 +41,8 @@ import DeckView from './DeckView'
     }
   })
 
-  Tabs.navigationOptions = ({ navigation }) => {
-    const { routeName } = navigation.state.routes[navigation.state.index]
-    const headerTitle = routeName
-
-    return {
-      headerTitle,
-    }
+  Tabs.navigationOptions = {
+    headerTitle: 'Study Time Mobile',
   }
 
   const Navigation = createStackNavigator({
