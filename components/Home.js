@@ -7,10 +7,6 @@ import { white } from '../utils/colors'
 
 
 class Home extends Component {
-  componentDidMount() {
-    this.props.navigation.setParams({title: "Home"})
-  }
-
   render() {
     const { userDecks } = this.props
 
