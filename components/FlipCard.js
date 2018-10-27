@@ -104,11 +104,10 @@ const styles = StyleSheet.create({
   flipCardBack: {
     position: "absolute",
     top: 0,
-    height: 100,
     width: 300
   },
   flipText: {
-    fontSize: 20,
+    fontSize: 16,
     color: '#888',
     fontWeight: 'bold',
   }

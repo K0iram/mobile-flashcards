@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, ScrollView, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
-import { white } from '../utils/colors'
+import { white, gray } from '../utils/colors'
 import { Ionicons } from '@expo/vector-icons'
 import { addQuiz } from '../utils/api'
 import { createNewQuiz } from '../actions'
@@ -101,7 +101,13 @@ const styles = StyleSheet.create({
     backgroundColor: white
   },
   btnContainer: {
-    backgroundColor: white
+    width: '100%',
+    backgroundColor: white,
+    borderTopWidth: 2,
+    borderColor: gray,
+    paddingTop: 10,
+    paddingRight: 0,
+    paddingLeft: 0
   },
   btnSpace: {
     marginBottom: 5,
@@ -116,7 +122,9 @@ const styles = StyleSheet.create({
   },
   infoBox: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderColor: 'gray',
   }
 })
 
