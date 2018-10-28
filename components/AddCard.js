@@ -25,10 +25,6 @@ class AddCard extends Component {
   }
 
   onQuestionChange = (question) => {
-    if(this.state.qLength >= 30) {
-      return alert("Question can only be 30 characters long")
-    }
-
     this.setState({
       question: question,
       qLength: question.length
@@ -36,9 +32,6 @@ class AddCard extends Component {
   }
 
   onAnswerChange = (answer) => {
-    if(this.state.aLength === 125) {
-      return alert("Answer can only be 125 characters long")
-    }
     this.setState({
       answer: answer,
       aLength: answer.length
@@ -79,17 +72,22 @@ class AddCard extends Component {
               style={styles.userInput}
               value={this.state.question}
               onChangeText={this.onQuestionChange}
-              disabled={qLength >= 30}
+              maxLength={30}
+              clearButtonMode='always'
             />
+            { qLength >= 30 && <Text style={styles.error}>To many characters!</Text>}
           </View>
-          <View>
+          <View style={{marginBottom: 20}}>
             <Text style={[styles.cardLength, {color: aLength >= 125 ? red : gray}]}>{`${aLength}/125`}</Text>
             <TextInput
               placeholder="New Answer"
               style={styles.userInput}
               value={this.state.answer}
               onChangeText={this.onAnswerChange}
+              maxLength={125}
+              clearButtonMode='always'
             />
+            { aLength >= 125 && <Text style={styles.error}>To many characters!</Text>}
           </View>
           <SubmitBtn onPress={this.addNewQuestion} disabled={!question || !answer}>
             Add Card
@@ -110,7 +108,10 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
-    margin: 10
+    margin: 10,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+    borderRightWidth: 0
   },
   header: {
     fontSize: 18,
@@ -123,6 +124,13 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     fontSize: 12,
     paddingRight: 10
+  },
+  error: {
+    color: red,
+    width: '100%',
+    textAlign: 'left',
+    fontSize: 12,
+    paddingLeft: 10
   }
 })
 

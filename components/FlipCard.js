@@ -60,12 +60,12 @@ class FlipCard extends Component {
       <View style={styles.container}>
         <TouchableOpacity onPress={this.flipCard}>
           <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
-            <Text style={styles.flipText}>
+            <Text style={[styles.flipText, styles.flipTextFront]}>
               {`${question}${question.slice(question.length - 1) === '?' ? '' : '?'}`}
             </Text>
           </Animated.View>
           <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
-            <Text style={[styles.flipText, styles.flipTextBack]}>
+            <Text style={styles.flipText}>
               {answer}
             </Text>
           </Animated.View>
@@ -110,6 +110,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#888',
     fontWeight: 'bold',
+  },
+  flipTextFront: {
+    justifyContent: 'center'
   }
 })
 
