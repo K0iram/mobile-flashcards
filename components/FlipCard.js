@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   flipCard: {
     width: 300,
-    height: 100,
+    height: 125,
     backgroundColor: '#fff',
     borderRadius: 10,
     padding: 20,

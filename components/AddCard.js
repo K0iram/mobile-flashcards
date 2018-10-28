@@ -28,6 +28,7 @@ class AddCard extends Component {
     if(this.state.qLength >= 30) {
       return alert("Question can only be 30 characters long")
     }
+
     this.setState({
       question: question,
       qLength: question.length
@@ -35,8 +36,8 @@ class AddCard extends Component {
   }
 
   onAnswerChange = (answer) => {
-    if(this.state.aLength >= 150) {
-      return alert("Answer can only be 150 characters long")
+    if(this.state.aLength === 125) {
+      return alert("Answer can only be 125 characters long")
     }
     this.setState({
       answer: answer,
@@ -78,10 +79,11 @@ class AddCard extends Component {
               style={styles.userInput}
               value={this.state.question}
               onChangeText={this.onQuestionChange}
+              disabled={qLength >= 30}
             />
           </View>
           <View>
-            <Text style={[styles.cardLength, {color: aLength >= 150 ? red : gray}]}>{`${aLength}/150`}</Text>
+            <Text style={[styles.cardLength, {color: aLength >= 125 ? red : gray}]}>{`${aLength}/125`}</Text>
             <TextInput
               placeholder="New Answer"
               style={styles.userInput}
