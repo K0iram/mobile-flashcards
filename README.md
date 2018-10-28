@@ -1,6 +1,6 @@
 ## Mobile Flashcards App - Study Time Mobile
 
-This is the final assesment for Udacity React Nanodegree. The challenge was to build a mobile application that allows the user to create flashcard decks and use them to quiz themselves. This app will be be able to run on IOS and Android operating systems.
+This is the final assesment for Udacity React Nanodegree. The challenge was to build a mobile application that allows the user to create flashcard decks and use them to quiz themselves. This app is developed and tested for IOS Devices.
 
 ## Getting Started
 
@@ -8,7 +8,7 @@ This is the final assesment for Udacity React Nanodegree. The challenge was to b
 2. ```yarn install```
 3. ```yarn start```
 
-**Make sure you have an IOS simulator installed and follow the promt on your terminal to start the IOS simulation**
+***Make sure you have an IOS simulator installed and follow the promt on your terminal to start the IOS simulation***
 
 ## Summary
 
