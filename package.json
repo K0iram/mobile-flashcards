@@ -1,5 +1,6 @@
 {
-  "name": "empty-project-template",
+  "name": "mobile-flashcards",
+  "author": "Mario Kennedy-Kavouras",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
