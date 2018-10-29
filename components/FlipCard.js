@@ -9,8 +9,8 @@ import {
 import SubmitBtn from './SubmitBtn'
 
 class FlipCard extends Component {
-
-  UNSAFE_componentWillMount() {
+  constructor(props) {
+    super(props)
     this.animatedValue = new Animated.Value(0)
     this.value = 0
     this.animatedValue.addListener(({ value }) => {
