@@ -1,10 +1,9 @@
 import {
-  GET_DECKS,
-  GET_DECK,
   ADD_CARD_TO_DECK,
   SAVE_DECK_TITLE,
   CREATE_QUIZ,
-  UPDATE_ANSWERS
+  UPDATE_ANSWERS,
+  REMOVE_DECK
 } from '../actions'
 import { combineReducers } from 'redux';
 
@@ -46,6 +45,8 @@ const decks = (state = {}, action) => {
           }
         }
       }
+    case REMOVE_DECK :
+      return state.filter(({ deck }) => deck !== action.deckTitle);
     default :
       return state
   }

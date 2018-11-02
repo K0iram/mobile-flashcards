@@ -22,7 +22,7 @@ export const submitCard = (key, card, cards) => {
   }))
 }
 
-export const removeEntry = (key) => {
+export const deleteDeck = (key) => {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
     .then((results) => {
       const data = JSON.parse(results)

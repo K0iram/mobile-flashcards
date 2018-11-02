@@ -1,9 +1,8 @@
-export const GET_DECKS = 'GET_DECKS'
-export const GET_DECK = 'GET_DECK'
 export const SAVE_DECK_TITLE = 'SAVE_DECK_TITLE'
 export const ADD_CARD_TO_DECK = 'ADD_CARD_TO_DECK'
 export const CREATE_QUIZ = 'CREATE_QUIZ'
 export const UPDATE_ANSWERS = 'UPDATE_ANSWERS'
+export const REMOVE_DECK = 'REMOVE_DECK'
 
 
 export const saveDeckTitle = (newDeck) => {
@@ -34,5 +33,12 @@ export const updateAnswers = (quizId, answers) => {
     type: UPDATE_ANSWERS,
     quizId,
     answers
+  }
+}
+
+export const removeDeck = (deckTitle) => {
+  return {
+    type: REMOVE_DECK,
+    deckTitle
   }
 }

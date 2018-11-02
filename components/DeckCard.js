@@ -1,11 +1,41 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import { gray, white } from '../utils/colors'
+import { FontAwesome } from '@expo/vector-icons'
+import { removeDeck } from '../actions'
+import { NavigationActions } from 'react-navigation'
+import { deleteDeck } from '../utils/api'
 
+const onRemoveDeck = (deckTitle) => {
+  const { onDelete } = this.props
+
+  let title = deckTitle.toLowerCase()
+  onDelete(title)
+  deleteDeck(title)
+}
 
 const DeckCard = ({title, questions}) => {
   return (
     <View style={styles.item}>
+      <View style={styles.deleteBtn}>
+        <TouchableOpacity
+          onPress={
+            () => {
+              Alert.alert(
+                'Alert!',
+                `Are you sure you want to delete the deck - ${title}?`,
+                [
+                  {text: 'OK', onPress: () => onRemoveDeck(title)},
+                  {text: 'Cancel', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false }
+              )
+            }
+        }>
+          <FontAwesome name='times' size={15}/>
+        </TouchableOpacity>
+      </View>
       <View style={styles.card}>
         <Text style={{fontSize: 20}}>
           {title}
@@ -25,6 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   item: {
+    position: 'relative',
     backgroundColor: white,
     borderRadius: 10,
     padding: 20,
@@ -40,6 +71,23 @@ const styles = StyleSheet.create({
       height: 3
     }
   },
+  deleteBtn: {
+    position: 'absolute',
+    top: 5,
+    right: 10,
+  }
 })
 
-export default DeckCard
+const mapStateToProps = ({decks}) => {
+  return {
+    decks
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDelete: (deckTitle) => dispatch(removeDeck(title))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckCard)
