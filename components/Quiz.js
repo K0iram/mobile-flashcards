@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { View, ScrollView, Text, StyleSheet } from 'react-native'
 import { updateAnswers } from '../actions'
 import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
-import { updateCorrectAnswers } from '../utils/api'
 import { Ionicons } from '@expo/vector-icons'
 import SubmitBtn from './SubmitBtn'
 import TextBtn from './TextBtn'
@@ -46,7 +45,6 @@ class Quiz extends Component {
     const { correct } = this.state
     const { deckID, onUpdateAnswers } = this.props
 
-    updateCorrectAnswers(deckID, correct)
     onUpdateAnswers(deckID, correct)
   }
 

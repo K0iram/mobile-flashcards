@@ -1,51 +1,51 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import { gray, white } from '../utils/colors'
 import { FontAwesome } from '@expo/vector-icons'
 import { removeDeck } from '../actions'
 import { NavigationActions } from 'react-navigation'
-import { deleteDeck } from '../utils/api'
 
-const onRemoveDeck = (deckTitle) => {
-  const { onDelete } = this.props
+class DeckCard extends Component {
 
-  let title = deckTitle.toLowerCase()
-  onDelete(title)
-  deleteDeck(title)
-}
+  onRemoveDeck = (deckTitle) => {
+    const { onDelete } = this.props
+    onDelete(deckTitle)
+  }
 
-const DeckCard = ({title, questions}) => {
-  return (
-    <View style={styles.item}>
-      <View style={styles.deleteBtn}>
-        <TouchableOpacity
-          onPress={
-            () => {
-              Alert.alert(
-                'Alert!',
-                `Are you sure you want to delete the deck - ${title}?`,
-                [
-                  {text: 'OK', onPress: () => onRemoveDeck(title)},
-                  {text: 'Cancel', onPress: () => console.log('OK Pressed')},
-                ],
-                { cancelable: false }
-              )
-            }
-        }>
-          <FontAwesome name='times' size={15}/>
-        </TouchableOpacity>
+  render() {
+    const { title, questions } = this.props
+    return (
+      <View style={styles.item}>
+        <View style={styles.deleteBtn}>
+          <TouchableOpacity
+            onPress={
+              () => {
+                Alert.alert(
+                  'Alert!',
+                  `Are you sure you want to delete the deck - ${title}?`,
+                  [
+                    {text: 'OK', onPress: () => this.onRemoveDeck(title)},
+                    {text: 'Cancel', onPress: () => console.log('OK Pressed')},
+                  ],
+                  { cancelable: false }
+                )
+              }
+          }>
+            <FontAwesome name='times' size={15}/>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.card}>
+          <Text style={{fontSize: 20}}>
+            {title}
+          </Text>
+          <Text style={{fontSize: 16, color: gray}}>
+            # of Cards: {questions.length}
+          </Text>
+        </View>
       </View>
-      <View style={styles.card}>
-        <Text style={{fontSize: 20}}>
-          {title}
-        </Text>
-        <Text style={{fontSize: 16, color: gray}}>
-          # of Cards: {questions.length}
-        </Text>
-      </View>
-    </View>
-  )
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -86,7 +86,7 @@ const mapStateToProps = ({decks}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onDelete: (deckTitle) => dispatch(removeDeck(title))
+    onDelete: (deckTitle) => dispatch(removeDeck(deckTitle))
   }
 }
 

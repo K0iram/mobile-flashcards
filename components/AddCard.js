@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, TextInput, StyleSheet, Text } from 'react-native'
-import { submitCard } from '../utils/api'
 import { addCardToDeck } from '../actions'
 import { purple, white, gray, red } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
@@ -48,8 +47,6 @@ class AddCard extends Component {
     }
 
     onAddCard(deckID, newCard)
-
-    submitCard(deckID, newCard, decks[deckID].questions)
 
     this.setState({
       question: '',

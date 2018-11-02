@@ -3,7 +3,6 @@ import { View, ScrollView, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { white, gray } from '../utils/colors'
 import { Ionicons } from '@expo/vector-icons'
-import { addQuiz } from '../utils/api'
 import { createNewQuiz } from '../actions'
 import SubmitBtn from './SubmitBtn'
 import FlipCard from './FlipCard'
@@ -30,7 +29,6 @@ class DeckView extends Component {
       correctAnswers: 0
     }
 
-    addQuiz(deckID, newQuiz, quizes)
     onCreateQuiz(deckID, newQuiz)
 
     navigation.navigate(

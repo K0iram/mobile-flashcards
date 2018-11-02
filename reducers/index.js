@@ -46,7 +46,10 @@ const decks = (state = {}, action) => {
         }
       }
     case REMOVE_DECK :
-      return state.filter(({ deck }) => deck !== action.deckTitle);
+      delete state[action.deckTitle]
+      return {
+        ...state,
+      }
     default :
       return state
   }

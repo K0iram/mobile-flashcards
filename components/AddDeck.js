@@ -3,7 +3,6 @@ import { View, TextInput, StyleSheet, Text, AsyncStorage } from 'react-native'
 import { connect } from 'react-redux'
 import { saveDeckTitle } from '../actions'
 import { NavigationActions } from 'react-navigation'
-import { addDeck } from '../utils/api'
 import { purple, white, gray, red } from '../utils/colors'
 import SubmitBtn from './SubmitBtn'
 
@@ -30,8 +29,6 @@ class AddDeck extends Component {
     }
 
     onSubmit(deckTitle)
-
-    addDeck(deckTitle)
 
     this.setState({deckTitle: ''})
 
