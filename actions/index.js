@@ -3,6 +3,7 @@ export const ADD_CARD_TO_DECK = 'ADD_CARD_TO_DECK'
 export const CREATE_QUIZ = 'CREATE_QUIZ'
 export const UPDATE_ANSWERS = 'UPDATE_ANSWERS'
 export const REMOVE_DECK = 'REMOVE_DECK'
+export const REMOVE_CARD = 'REMOVE_CARD'
 
 
 export const saveDeckTitle = (newDeck) => {
@@ -40,5 +41,13 @@ export const removeDeck = (deckTitle) => {
   return {
     type: REMOVE_DECK,
     deckTitle
+  }
+}
+
+export const removeCard = (key, index) => {
+  return {
+    type: REMOVE_CARD,
+    key,
+    index
   }
 }

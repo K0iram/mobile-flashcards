@@ -3,7 +3,8 @@ import {
   SAVE_DECK_TITLE,
   CREATE_QUIZ,
   UPDATE_ANSWERS,
-  REMOVE_DECK
+  REMOVE_DECK,
+  REMOVE_CARD
 } from '../actions'
 import { combineReducers } from 'redux';
 
@@ -49,6 +50,15 @@ const decks = (state = {}, action) => {
       delete state[action.deckTitle]
       return {
         ...state,
+      }
+    case REMOVE_CARD :
+      let qRemoved = state[action.key].questions.filter((q, i) => i !== action.index)
+      return {
+        ...state,
+        [action.key]: {
+          ...state[action.key],
+          questions: qRemoved
+        }
       }
     default :
       return state

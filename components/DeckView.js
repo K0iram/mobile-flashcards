@@ -70,7 +70,7 @@ class DeckView extends Component {
           <Text># of Cards: {questions.length}</Text>
         </View>
         <ScrollView style={styles.cardContainer}>
-          {questions.map((q, i) => <FlipCard key={i} answer={q.answer} question={q.question}/>)}
+          {questions.map((q, i) => <FlipCard key={i} answer={q.answer} question={q.question} deckTitle={deckID} index={i}/>)}
         </ScrollView>
         <View style={styles.btnContainer}>
           <SubmitBtn style={styles.btnPadding} onPress={() => this.props.navigation.navigate(
