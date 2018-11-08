@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import {
   StyleSheet,
   Text,
@@ -9,7 +8,6 @@ import {
   Alert
 } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
-import { removeCard } from '../actions'
 import SubmitBtn from './SubmitBtn'
 
 class FlipCard extends Component {
@@ -28,11 +26,6 @@ class FlipCard extends Component {
       inputRange: [0, 180],
       outputRange: ['180deg', '360deg']
     })
-  }
-
-  onRemoveCard = (deckTitle, index) => {
-    const { onDeleteCard } = this.props
-    onDeleteCard(deckTitle, index)
   }
 
   flipCard = () => {
@@ -64,38 +57,42 @@ class FlipCard extends Component {
       ]
     }
 
-    const {answer, question, deckTitle, index} = this.props
+    const {answer, question, deckTitle, index, isEditing, deleteCard} = this.props
     return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={
-            () => {
-              Alert.alert(
-                'Alert!',
-                `Are you sure you want to delete the this card?`,
-                [
-                  {text: 'OK', onPress: () => this.onRemoveCard(deckTitle, index)},
-                  {text: 'Cancel', onPress: () => console.log('OK Pressed')},
-                ],
-                { cancelable: false }
-              )
-            }
-        }>
-          <FontAwesome name='times' size={15}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.flipCard}>
-          <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
-            <Text style={[styles.flipText, styles.flipTextFront]}>
-              {`${question}${question.slice(question.length - 1) === '?' ? '' : '?'}`}
-            </Text>
-          </Animated.View>
-          <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
-            <Text style={styles.flipText}>
-              {answer}
-            </Text>
-          </Animated.View>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.container}>
+          {isEditing &&
+            <TouchableOpacity
+              onPress={
+                () => {
+                  Alert.alert(
+                    'Alert!',
+                    `Are you sure you want to delete the this card?`,
+                    [
+                      {text: 'OK', onPress: () => deleteCard(deckTitle, index)},
+                      {text: 'Cancel', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                  )
+                }
+              }
+              style={styles.deleteBtn}
+            >
+              <FontAwesome name='times' size={15}/>
+            </TouchableOpacity>
+          }
+          <TouchableOpacity onPress={this.flipCard}>
+            <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
+              <Text style={[styles.flipText, styles.flipTextFront]}>
+                {`${question}${question.slice(question.length - 1) === '?' ? '' : '?'}`}
+              </Text>
+            </Animated.View>
+            <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
+              <Text style={styles.flipText}>
+                {answer}
+              </Text>
+            </Animated.View>
+          </TouchableOpacity>
+        </View>
     )
   }
 }
@@ -104,7 +101,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    flexDirection: 'row'
   },
   flipCard: {
     width: 300,
@@ -138,21 +136,12 @@ const styles = StyleSheet.create({
   },
   flipTextFront: {
     justifyContent: 'center'
+  },
+  deleteBtn: {
+    margin: 10
   }
 })
 
 
-const mapStateToProps = ({decks}) => {
-  return {
-    decks
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onDeleteCard: (deckTitle, index) => dispatch(removeCard(deckTitle, index))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FlipCard)
+export default FlipCard
 

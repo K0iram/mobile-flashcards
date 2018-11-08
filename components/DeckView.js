@@ -1,24 +1,53 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, StyleSheet } from 'react-native'
+import { View, ScrollView, Text, StyleSheet, Button } from 'react-native'
 import { connect } from 'react-redux'
 import { white, gray } from '../utils/colors'
 import { Ionicons } from '@expo/vector-icons'
-import { createNewQuiz } from '../actions'
+import { createNewQuiz, removeCard } from '../actions'
 import SubmitBtn from './SubmitBtn'
 import FlipCard from './FlipCard'
+import TextBtn from './TextBtn'
+import HeaderButtons, { HeaderButton, Item } from 'react-navigation-header-buttons';
 
+const IoniconsHeaderButton = passMeFurther => (
+  <HeaderButton {...passMeFurther} IconComponent={Ionicons} iconSize={23} color="white" />
+)
 
 class DeckView extends Component {
   static navigationOptions = ({ navigation }) => {
-    const { deckID } = navigation.state.params
+    const { deckID, toggleEdit } = navigation.state.params
 
     return {
-      title: deckID
+      title: deckID,
+      headerRight: (
+       <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+         <Item
+          title="search"
+          iconName="ios-trash"
+          onPress={toggleEdit}/>
+       </HeaderButtons>
+      ),
     }
   }
 
+  state = {
+    isEditing: false
+  }
+
+  componentDidMount() {
+     this.props.navigation.setParams({ toggleEdit: this.toggleEdit });
+   }
+
   shouldComponentUpdate (nextProps) {
     return nextProps.questions !== null
+  }
+
+  toggleEdit = () => {
+    if(this.props.questions < 1) {
+      return
+    }
+
+    this.setState({isEditing: !this.state.isEditing})
   }
 
   onCreateQuiz = () => {
@@ -40,8 +69,14 @@ class DeckView extends Component {
     )
   }
 
+  onRemoveCard = (deckTitle, index) => {
+    const { onDeleteCard } = this.props
+    onDeleteCard(deckTitle, index)
+    this.setState({isEditing: false})
+  }
+
   render() {
-    const { questions, deckID } = this.props
+    const { questions, deckID, onDeleteCard } = this.props
 
     if(questions.length < 1) {
       return (
@@ -70,7 +105,7 @@ class DeckView extends Component {
           <Text># of Cards: {questions.length}</Text>
         </View>
         <ScrollView style={styles.cardContainer}>
-          {questions.map((q, i) => <FlipCard key={i} answer={q.answer} question={q.question} deckTitle={deckID} index={i}/>)}
+          {questions.map((q, i) => <FlipCard key={i} answer={q.answer} question={q.question} deckTitle={deckID} index={i} isEditing={this.state.isEditing} deleteCard={this.onRemoveCard}/>)}
         </ScrollView>
         <View style={styles.btnContainer}>
           <SubmitBtn style={styles.btnPadding} onPress={() => this.props.navigation.navigate(
@@ -141,7 +176,8 @@ const mapDispatchToProps = (dispatch, { navigation }) => {
 
   return {
     goBack: () => navigation.goBack(),
-    onCreateQuiz: (id, quiz) => dispatch(createNewQuiz(id, quiz))
+    onCreateQuiz: (id, quiz) => dispatch(createNewQuiz(id, quiz)),
+    onDeleteCard: (deckTitle, index) => dispatch(removeCard(deckTitle, index))
   }
 }
 

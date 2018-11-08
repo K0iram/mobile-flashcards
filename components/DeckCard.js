@@ -50,9 +50,7 @@ class DeckCard extends Component {
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: 'row',
-    marginTop: 12,
-    justifyContent: 'space-between'
+    flexDirection: 'column'
   },
   item: {
     position: 'relative',
